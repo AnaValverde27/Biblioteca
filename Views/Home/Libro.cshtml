@@ -1,0 +1,51 @@
+﻿@model Biblioteca.Models.Libro
+
+@{
+    ViewBag.Title = "Libro";
+}
+
+<h2>Ingresar Nuevo Libro</h2>
+
+@using (Html.BeginForm("RegistrarLibro", "Libro", FormMethod.Post, new { @class = "form", style = "margin-top: 20px;" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.ISBN)
+        @Html.TextBoxFor(model => model.ISBN, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ISBN, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Titulo)
+        @Html.TextBoxFor(model => model.Titulo, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CasaEditorial)
+        @Html.TextBoxFor(model => model.CasaEditorial, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CasaEditorial, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumeroEdicion)
+        @Html.TextBoxFor(model => model.NumeroEdicion, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.NumeroEdicion, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NombreAutor)
+        @Html.TextBoxFor(model => model.NombreAutor, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.NombreAutor, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CantidadCopiasDisponibles)
+        @Html.TextBoxFor(model => model.CantidadCopiasDisponibles, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CantidadCopiasDisponibles, "", new { @class = "text-danger" })
+    </div>
+
+    <input type="submit" value="Registrar libro" class="btn btn-primary" />
+}
+
+@Html.ActionLink("Volver a Página Principal", "Index", "Home", new { }, new { @class = "btn btn-secondary", @style = "margin-top: 20px;" })

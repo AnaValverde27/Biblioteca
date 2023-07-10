@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Biblioteca.Models.Libro>
+
+@{
+    ViewBag.Title = "Devolucion";
+}
+
+<h2>Recibir Libro Prestado</h2>
+
+<form action="@Url.Action("BuscarLibrosPrestado","Devolucion")" method="post">
+    <div class="form-group">
+        <label for="Cedula">Cédula</label>
+        <input type="text" id="Cedula" name="Cedula" class="form-control" placeholder="Ingrese la identificación de la persona" />
+    </div>
+
+    <input type="submit" value="Buscar Libros" class="btn btn-primary" />
+</form>
+
+@if (!string.IsNullOrEmpty(ViewBag.Advertencia))
+{
+    <div class="alert alert-warning" style="margin-top: 20px;">@ViewBag.Advertencia</div>
+}
+
+@if (Model != null)
+{
+    <h3>Libros Prestados:</h3>
+    <form action="@Url.Action("ProcesarDevolucion","Devolucion")" method="post">
+        <input type="hidden" name="Cedula" value="@ViewBag.Cedula" />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Título</th>
+                    <th>Casa Editorial</th>
+                    <th>Número de Edición</th>
+                    <th>Nombre de Autor</th>
+                    <th>Cantidad de Copias Disponibles</th>
+                    <th>Devolver</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var libro in Model)
+                {
+                    <tr>
+                        <td>@libro.ISBN</td>
+                        <td>@libro.Titulo</td>
+                        <td>@libro.CasaEditorial</td>
+                        <td>@libro.NumeroEdicion</td>
+                        <td>@libro.NombreAutor</td>
+                        <td>@libro.CantidadCopiasDisponibles</td>
+                        <td><input type="checkbox" name="librosDevolver" value="@libro.ISBN" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input type="submit" value="Devolver Libros" class="btn btn-primary" />
+    </form>
+}
+@Html.ActionLink("Volver a Página Principal", "Index", "Home", new { }, new { @class = "btn btn-secondary", @style = "margin-top: 20px;"})

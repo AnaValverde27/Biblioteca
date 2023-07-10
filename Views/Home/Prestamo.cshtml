@@ -1,0 +1,44 @@
+﻿@model Biblioteca.Models.Prestamo
+
+@{
+    ViewBag.Title = "Prestamo";
+}
+
+<h2>Registrar Prestamo</h2>
+
+@using (Html.BeginForm("RegistrarPrestamo", "Prestamo", FormMethod.Post, new { @class = "form", style = "margin-top: 20px;" }))
+{
+    <p class="text-danger">@ViewBag.ErrorMessage</p>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Cedula)
+        @Html.TextBoxFor(model => model.Cedula, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Cedula, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaDevolucion)
+        @Html.EditorFor(model => model.FechaDevolucion, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+        @Html.ValidationMessageFor(model => model.FechaDevolucion, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ISBN)
+        @Html.TextBoxFor(model => model.ISBN, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ISBN, "", new { @class = "text-danger" })
+    </div>
+
+    <input type="submit" value="Registrar Prestamo" class="btn btn-primary" />
+}
+
+@Html.ActionLink("Volver a Página Principal", "Index", "Home", new { }, new { @class = "btn btn-secondary", @style = "margin-top: 20px;" })
+
+<script>
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            dateFormat: 'yy-mm-dd', // Formato de fecha deseado
+            minDate: 0 // Evitar seleccionar fechas anteriores a la fecha actual
+        });
+    });
+</script>
+
+
